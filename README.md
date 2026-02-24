@@ -1,3 +1,7 @@
+## 📌 Project Overview
+This project demonstrates basic CRUD operations using Python lists and loops.
+
+
 # 📚 Library Management System
 
 A console-based Library Management System built using Python.
