@@ -1,39 +1,56 @@
-📚 Library Management System
+📚 Library Management System (Console + GUI)
 
 📌 Project Description
 
-This project is a console-based Library Management System developed using Python.
-It allows users to manage books in a simple library using basic programming concepts.
+This project includes two versions of a Library Management System developed using Python:
 
-The system demonstrates how to use:
+🔹 Level 1 – Console-Based System
 
-- Lists
-- Loops
-- Conditional statements
-- File handling
+A simple menu-driven program using basic Python concepts.
 
-Books are stored in a text file (books.txt) so that the data remains saved even after the program is closed.
+🔹 Level 2 – GUI-Based System
+
+An advanced version using Tkinter (GUI) with better user interaction.
+
+The system demonstrates:
+
+- Python Basics (Lists, Loops, Conditions)
+- File Handling
+- Object-Oriented Programming (OOP)
+- GUI Development using Tkinter
+
+All book data is stored in a text file ("books.txt") so it remains saved even after closing the program.
 
 ---
 
 🚀 Features
 
-- Add a new book
-- View all books in the library
-- Search for a book
-- Delete a book
-- Simple menu-driven interface
-- Data stored in a text file
+✅ Common Features
+
+- Add Book
+- View Books
+- Search Book
+- Delete Book
+- Persistent Storage (books.txt)
+
+🖥️ GUI Features (Level 2)
+
+- User-friendly interface
+- Buttons for all operations
+- Input field for book name
+- Display area for output
 
 ---
 
 🛠 Technologies Used
 
 - Python
+- Tkinter (GUI)
 - File Handling
 - Lists
 - Loops
 - Conditional Statements
+- OOP Concepts
 
 ---
 
@@ -41,25 +58,26 @@ Books are stored in a text file (books.txt) so that the data remains saved even 
 
 Library-Management-System/
 
-library_management.py   → Main program
-books.txt               → File to store book data
-README.md               → Project documentation
+- library_management.py → Console Version (Level 1)
+- library_management_gui.py → GUI Version (Level 2)
+- books.txt → Data storage file
+- README.md → Documentation
 
 ---
 
 ▶️ How to Run
 
-1. Download or clone the repository.
-
-2. Open the project folder.
-
-3. Run the Python file:
+🔹 Run Console Version
 
 python library_management.py
 
+🔹 Run GUI Version
+
+python library_management_gui.py
+
 ---
 
-💻 Example Program Execution
+💻 Example (Console Output)
 
 ===== Library Management System =====
 
@@ -72,36 +90,19 @@ python library_management.py
 Enter your choice: 1
 
 Enter book name: Python Programming
-
 Book added successfully!
 
 ---
 
-Search Example
+🖥️ GUI Overview
 
-Enter your choice: 3
-
-Enter book name to search: Python Programming
-
-Book found!
-
----
-
-Delete Example
-
-Enter your choice: 4
-
-Enter book name to delete: Python Programming
-
-Book deleted successfully!
-
----
-
-Exit Example
-
-Enter your choice: 5
-
-Exiting Program...
+- Input box for book name
+- Buttons:
+  - Add Book
+  - View Books
+  - Search Book
+  - Delete Book
+- Output display area
 
 ---
 
@@ -109,15 +110,23 @@ Exiting Program...
 
 This project is created for learning and practicing:
 
-- Python programming basics
-- Menu-driven programs
-- File handling in Python
-- Data storage using text files
+- Python Programming Basics
+- Menu-driven Programs
+- File Handling
+- GUI Development
+- Real-world Project Building
 
 ---
 
 👩‍💻 Author
 
 Saloni Tiwari
-GitHub Username: 25f2005869-glitch
+GitHub: 25f2005869-glitch
 BS Data Science Student
+
+---
+
+⭐ Project Level
+
+- Level 1 → Beginner (Console Based)
+- Level 2 → Intermediate (GUI Based)
