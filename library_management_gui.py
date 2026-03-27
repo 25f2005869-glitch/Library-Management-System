@@ -1,4 +1,4 @@
-"""
+
 ========================================
 Library Management System (GUI + OOP)
 
@@ -11,7 +11,6 @@ GUI based library system with:
 - Search Book
 - Delete Book
 ========================================
-"""
 
 import tkinter as tk
 from tkinter import messagebox
@@ -23,6 +22,9 @@ class Library:
     def __init__(self, filename="books.txt"):
         self.filename = filename
         self.books = self.load_books()
+
+    def _norm(self, s: str) -> str:
+        return s.strip().lower()
 
     def load_books(self):
         try:
@@ -37,21 +39,30 @@ class Library:
                 f.write(book + "\n")
 
     def add_book(self, book):
-        if book and book not in self.books:
-            self.books.append(book)
-            self.save_books()
-            return True
-        return False
+        book = book.strip()
+        if not book:
+            return False
+
+        existing = {self._norm(b) for b in self.books}
+        if self._norm(book) in existing:
+            return False
+
+        self.books.append(book)
+        self.save_books()
+        return True
 
     def delete_book(self, book):
-        if book in self.books:
-            self.books.remove(book)
-            self.save_books()
-            return True
+        key = self._norm(book)
+        for i, b in enumerate(self.books):
+            if self._norm(b) == key:
+                self.books.pop(i)
+                self.save_books()
+                return True
         return False
 
     def search_book(self, book):
-        return book in self.books
+        key = self._norm(book)
+        return any(self._norm(b) == key for b in self.books)
 
 
 # ========================================
@@ -66,6 +77,7 @@ class LibraryGUI:
         self.root.geometry("400x400")
 
         tk.Label(root, text="Author: Saloni Tiwari").pack(pady=5)
+
         # Entry
         self.entry = tk.Entry(root, width=30)
         self.entry.pack(pady=10)
@@ -96,6 +108,10 @@ class LibraryGUI:
 
     def search_book(self):
         book = self.entry.get().strip()
+        if not book:
+            messagebox.showerror("Error", "Book name cannot be empty!")
+            return
+
         if self.lib.search_book(book):
             messagebox.showinfo("Result", "Book Found!")
         else:
@@ -103,6 +119,10 @@ class LibraryGUI:
 
     def delete_book(self):
         book = self.entry.get().strip()
+        if not book:
+            messagebox.showerror("Error", "Book name cannot be empty!")
+            return
+
         if self.lib.delete_book(book):
             messagebox.showinfo("Success", "Book Deleted!")
             self.view_books()
