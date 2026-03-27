@@ -1,68 +1,39 @@
-# Load books from file at start
-try:
-    with open("books.txt", "r") as file:
-        books = file.read().splitlines()
-except FileNotFoundError:
-    books = []
+import os
 
-def show_menu():
-    print("\n===== Library Management System =====")
-    print("1. Add Book")
-    print("2. View Books")
-    print("3. Search Book")
-    print("4. Delete Book")
-    print("5. Exit")
+BOOKS_FILE = 'books.txt'
 
-while True:
-    show_menu()
-    choice = input("Enter your choice (1-5): ")
+class Library:
+    def __init__(self):
+        # Load existing books
+        self.books = self.load_books()
 
-    # Add Book
-    if choice == "1":
-        book_name = input("Enter book name: ")
-        books.append(book_name)
+    def load_books(self):
+        if os.path.exists(BOOKS_FILE):
+            with open(BOOKS_FILE, 'r') as f:
+                return [line.strip() for line in f.readlines()]
+        return []
 
-        with open("books.txt", "a") as file:
-            file.write(book_name + "\n")
+    def save_books(self):
+        with open(BOOKS_FILE, 'w') as f:
+            for book in self.books:
+                f.write(book + '\n')
 
-        print("Book added successfully!")
+    def add_book(self, book_name):
+        if not book_name:
+            raise ValueError('Book name cannot be empty.')
+        # Preventing case-insensitive duplicates
+        normalized_name = book_name.lower()
+        if normalized_name in (b.lower() for b in self.books):
+            raise ValueError('Book already exists.')
+        self.books.append(book_name)
+        self.save_books()
 
-    # View Books
-    elif choice == "2":
-        if books:
-            print("\nAvailable Books:")
-            for book in books:
-                print("-", book)
-        else:
-            print("No books available.")
+    def search(self, book_name):
+        # Case-insensitive search
+        normalized_name = book_name.lower()
+        return [book for book in self.books if normalized_name in book.lower()]
 
-    # Search Book
-    elif choice == "3":
-        search = input("Enter book name to search: ")
-        if search in books:
-            print("Book found!")
-        else:
-            print("Book not found.")
-
-    # Delete Book
-    elif choice == "4":
-        delete_book = input("Enter book name to delete: ")
-        if delete_book in books:
-            books.remove(delete_book)
-
-            # Rewrite file after delete
-            with open("books.txt", "w") as file:
-                for book in books:
-                    file.write(book + "\n")
-
-            print("Book deleted successfully!")
-        else:
-            print("Book not found.")
-
-    # Exit
-    elif choice == "5":
-        print("Exiting Program...")
-        break
-
-    else:
-        print("Invalid choice! Try again.")
+    def delete_book(self, book_name):
+        normalized_name = book_name.lower()
+        self.books = [book for book in self.books if book.lower() != normalized_name]
+        self.save_books()
